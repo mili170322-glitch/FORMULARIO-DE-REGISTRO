@@ -1,0 +1,306 @@
+/* ==================================================
+   Variables y temas
+================================================== */
+/* Paleta clara predeterminada usada por toda la interfaz. */
+:root {
+  --bg: #fde9f4;
+  --surface: #fffafd;
+  --ink: #2b1240;
+  --muted: #6c527f;
+  --line: #e6cbe0;
+  --pink: #d92b86;
+  --pink-ink: #ffffff;
+  --purple: #7a35c9;
+  --err: #b3123f;
+  --focus: #5b21b6;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  /* Activa automáticamente la paleta oscura si el sistema lo solicita. */
+  :root:not([data-theme="light"]) {
+    --bg: #1b0e2b;
+    --surface: #28163e;
+    --ink: #fbe8f5;
+    --muted: #c1a7d1;
+    --line: #43295e;
+    --pink: #ff6fb5;
+    --pink-ink: #2b0f3d;
+    --purple: #b98aff;
+    --err: #ff8fae;
+    --focus: #d8bcff;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  /* Permite aplicar el tema oscuro de forma explícita. */
+  --bg: #1b0e2b;
+  --surface: #28163e;
+  --ink: #fbe8f5;
+  --muted: #c1a7d1;
+  --line: #43295e;
+  --pink: #ff6fb5;
+  --pink-ink: #2b0f3d;
+  --purple: #b98aff;
+  --err: #ff8fae;
+  --focus: #d8bcff;
+  color-scheme: dark;
+}
+
+/* ==================================================
+   Base
+================================================== */
+/* Aplica el modelo de dimensiones uniforme a todos los elementos. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  /* Mantiene visibles los controles con zonas seguras de dispositivos móviles. */
+  scroll-padding-top: env(safe-area-inset-top, 0);
+}
+
+/* Estilos generales del documento y tipografía base. */
+body {
+  min-height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Karla", "Segoe UI", system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+.wrap {
+  /* Limita el ancho del formulario y conserva espacio lateral adaptable. */
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+}
+
+/* ==================================================
+   Encabezados y textos
+================================================== */
+/* Tipografía decorativa compartida por títulos y nombre del club. */
+h1,
+.logo,
+h2 {
+  font-family: "Bodoni Moda", "Bodoni 72", Didot, "Playfair Display", Georgia, serif;
+}
+
+h1 {
+  margin: 0 0 4px;
+  color: var(--purple);
+  font-size: clamp(1.5rem, 6vw, 1.9rem);
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.logo {
+  display: block;
+  margin: 0 0 14px;
+  color: var(--pink);
+  font-size: clamp(4.2rem, 26vw, 7rem);
+  font-weight: 800;
+  line-height: .9;
+  letter-spacing: .02em;
+}
+
+h2 {
+  margin: 0 0 8px;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.lead,
+.meter-t,
+.reqs,
+.note {
+  color: var(--muted);
+}
+
+.lead {
+  margin: 0 0 24px;
+}
+
+/* ==================================================
+   Contenedores y formulario
+================================================== */
+/* Fondo y borde comunes para el formulario y la confirmación. */
+form,
+.done {
+  border: 2px solid var(--purple);
+  border-radius: 16px;
+  padding: 24px;
+  background: var(--surface);
+}
+
+form {
+  box-shadow: 6px 6px 0 var(--pink);
+}
+
+.field {
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+/* Campos de entrada y estados visibles de enfoque o error. */
+input {
+  width: 100%;
+  border: 2px solid var(--line);
+  border-radius: 10px;
+  padding: 11px 12px;
+  background: var(--bg);
+  color: var(--ink);
+  font: inherit;
+}
+
+input:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.invalid input {
+  border-color: var(--err);
+}
+
+.error {
+  margin: 6px 0 0;
+  color: var(--err);
+  font-size: .9rem;
+}
+
+.error:empty {
+  display: none;
+}
+
+/* ==================================================
+   Contraseña
+================================================== */
+/* Posiciona el botón de mostrar dentro del campo de contraseña. */
+.pw {
+  position: relative;
+}
+
+.pw input {
+  padding-right: 84px;
+}
+
+.show {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+  border: 0;
+  padding: 6px 8px;
+  background: none;
+  color: var(--purple);
+  font: inherit;
+  font-size: .9rem;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.meter {
+  height: 8px;
+  margin-top: 8px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--line);
+}
+
+.meter i {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--err);
+  transition: width .2s, background .2s;
+}
+
+.meter-t {
+  margin: 4px 0 0;
+  font-size: .85rem;
+}
+
+.reqs {
+  margin: 8px 0 0;
+  padding: 0;
+  font-size: .88rem;
+  list-style: none;
+}
+
+.reqs li::before {
+  content: "○ ";
+}
+
+.reqs li.ok {
+  color: var(--purple);
+  font-weight: 700;
+}
+
+.reqs li.ok::before {
+  content: "● ";
+}
+
+/* ==================================================
+   Acciones y resultado
+================================================== */
+/* Estilos compartidos de tipografía y cursor para los botones. */
+button.send,
+.btn2 {
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button.send {
+  width: 100%;
+  border: 2px solid var(--purple);
+  border-radius: 12px;
+  padding: 13px 18px;
+  background: var(--pink);
+  color: var(--pink-ink);
+  font-size: 1.05rem;
+}
+
+button.send:active {
+  transform: translate(2px, 2px);
+}
+
+.done[hidden] {
+  display: none;
+}
+
+.btn2 {
+  margin-top: 8px;
+  border: 2px solid var(--purple);
+  border-radius: 12px;
+  padding: 9px 16px;
+  background: transparent;
+  color: var(--purple);
+}
+
+.note {
+  margin-top: 16px;
+  font-size: .85rem;
+}
+
+/* ==================================================
+   Accesibilidad
+================================================== */
+/* Desactiva las animaciones cuando el usuario lo configura así. */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

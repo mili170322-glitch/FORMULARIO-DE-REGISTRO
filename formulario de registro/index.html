@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Configuración básica del documento y recursos visuales -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Club de fans de Nana — Registro</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,600;0,800;1,700&family=Karla:wght@400;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- Contenedor principal: agrupa el título y el registro -->
+<main class="wrap">
+  <!-- Identidad visual del club -->
+  <h1>Club de fans de</h1>
+  <span class="logo" aria-hidden="true">NANA</span>
+  <p class="lead">Unite al club con tu correo, tu edad y una contraseña.</p>
+
+  <!-- Formulario: recopila los datos y ejecuta el envío mediante JavaScript -->
+  <form id="form" novalidate>
+    <!-- Campo de correo: valida formato y registros existentes -->
+    <div class="field">
+      <label for="email">Correo electrónico</label>
+      <input id="email" type="email" autocomplete="email" inputmode="email">
+      <p class="error" id="e-email" role="alert"></p>
+    </div>
+
+    <!-- Campo de edad: exige un número entero entre 0 y 120 -->
+    <div class="field">
+      <label for="edad">Edad</label>
+      <input id="edad" type="number" min="0" max="120" step="1" inputmode="numeric">
+      <p class="error" id="e-edad" role="alert"></p>
+    </div>
+
+    <!-- Campo de contraseña: permite mostrarla y evalúa sus requisitos -->
+    <div class="field">
+      <label for="pass">Contraseña</label>
+      <div class="pw">
+        <input id="pass" type="password" autocomplete="new-password">
+        <button class="show" id="show" type="button" aria-pressed="false">Mostrar</button>
+      </div>
+      <!-- Indicador visual de seguridad -->
+      <div class="meter" aria-hidden="true"><i id="bar"></i></div>
+      <p class="meter-t" id="nivel" aria-live="polite">Seguridad: sin evaluar</p>
+      <!-- Requisitos de longitud, números y combinación de mayúsculas/minúsculas -->
+      <ul class="reqs" id="reqs">
+        <li data-r="len">Al menos 8 caracteres</li>
+        <li data-r="num">Un número</li>
+        <li data-r="mix">Una mayúscula y una minúscula</li>
+      </ul>
+      <p class="error" id="e-pass" role="alert"></p>
+    </div>
+
+    <!-- Acción principal: valida todos los campos y guarda el registro -->
+    <button class="send" type="submit">Unirme al club</button>
+  </form>
+
+  <!-- Resultado exitoso: reemplaza temporalmente al formulario -->
+  <section class="done" id="done" hidden aria-live="polite">
+    <h2>¡Bienvenida/o al club!</h2>
+    <p id="ok"></p>
+    <!-- Acción secundaria: limpia el formulario para registrar otra cuenta -->
+    <button class="btn2" id="otro" type="button">Registrar otra cuenta</button>
+  </section>
+
+  <!-- Aviso sobre el almacenamiento local y la privacidad de la contraseña -->
+  <p class="note">Demostración: los registros se guardan solo en este navegador (la contraseña como hash, nunca en texto plano) y no se envían a ningún servidor.</p>
+</main>
+<!-- Lógica de validación, almacenamiento y acciones de los controles -->
+<script src="script.js"></script>
+</body>
+</html>
